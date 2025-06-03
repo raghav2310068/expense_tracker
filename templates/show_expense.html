@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense History</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: linear-gradient(to right top, #0f172a, #1e293b);
+        color: #f8fafc;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+      }
+
+      .container {
+        max-width: 1000px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        color: #facc15;
+      }
+
+      .filter {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      input[type="date"] {
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #475569;
+        background-color: #1e293b;
+        color: #f8fafc;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: rgba(255, 255, 255, 0.04);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 14px 16px;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      th {
+        background-color: rgba(250, 204, 21, 0.08);
+        color: #facc15;
+      }
+
+      tr:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        color: #94a3b8;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📅 Expense History</h1>
+
+      <div class="filter">
+        <form method="get" action="/show_expense">
+          <label for="filter-date" style="display: none">Filter by Date:</label>
+          <input type="date" id="filter-date" name="date" required />
+          <button
+            type="submit"
+            style="
+              padding: 10px 16px;
+              border: none;
+              background-color: #facc15;
+              color: #1e293b;
+              font-weight: 600;
+              border-radius: 8px;
+              cursor: pointer;
+            "
+          >
+            🔍 Filter
+          </button>
+        </form>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Amount ($)</th>
+            <th>Category</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for i in details:%}
+          <tr>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+            <td>{{i[3]}}</td>
+            <td>{{i[4]}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="go back">
+        <form method="post" action="/show_expense">
+          <a href="{{url_for('home')}}"
+            ><button
+              type="submit"
+              style="
+                margin-top: 25px;
+                margin-left: 50%;
+                padding: 10px 16px;
+                border: none;
+                background-color: #facc15;
+                color: #1e293b;
+                font-weight: 600;
+                border-radius: 8px;
+                cursor: pointer;
+              "
+            >
+              HOME 🏠
+            </button>
+          </a>
+        </form>
+      </div>
+      <div class="footer">&copy; 2025 EliteTracker by Raghav 💼</div>
+    </div>
+  </body>
+</html>
